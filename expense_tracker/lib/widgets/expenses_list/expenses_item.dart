@@ -9,7 +9,10 @@ class ExpensesItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return Card(
       child: ListTile(
-        title: Text(expense.title),
+        title: Text(
+          expense.title,
+          style: Theme.of(context).textTheme.titleLarge,
+        ),
         subtitle: Text('\$${expense.amount.toStringAsFixed(2)}'),
         trailing: Row(
           mainAxisSize: MainAxisSize.min,
