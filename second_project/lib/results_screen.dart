@@ -4,8 +4,9 @@ import 'package:second_project/data/questions.dart';
 import 'package:second_project/questions_summary.dart';
 
 class ResultsScreen extends StatelessWidget {
-  ResultsScreen(this.selectedAnswers, {super.key});
+  const ResultsScreen(this.selectedAnswers, this.restartQuiz, {super.key});
   final List<String> selectedAnswers;
+  final void Function() restartQuiz;
 
   List<Map<String, Object>> getSummaryData() {
     final List<Map<String, Object>> summary = [];
@@ -38,15 +39,27 @@ class ResultsScreen extends StatelessWidget {
         children: [
           Text(
             'You answered $numCorrectQuestions out of $totalQuestions questions correctly!',
-            style: GoogleFonts.sreeKrushnadevaraya(color: Colors.white),
+            style: GoogleFonts.lato(
+              color: const Color.fromARGB(255, 201, 153, 252),
+              fontSize: 24,
+              fontWeight: FontWeight.bold,
+            ),
             textAlign: TextAlign.center,
           ),
           SizedBox(height: 30),
           QuestionsSummary(summaryData),
           SizedBox(height: 30),
-          Text(
-            'Restart Quiz',
-            style: GoogleFonts.lato(color: Colors.white, fontSize: 24),
+          OutlinedButton.icon(
+            onPressed: restartQuiz,
+            style: OutlinedButton.styleFrom(
+              foregroundColor: Colors.white,
+              padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadiusGeometry.circular(15),
+              ),
+            ),
+            icon: Icon(Icons.refresh),
+            label: Text("Restart Quiz"),
           ),
         ],
       ),
